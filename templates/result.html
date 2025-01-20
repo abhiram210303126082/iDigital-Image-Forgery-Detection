@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fake Buster - Result</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
+        integrity="sha512-Fo3rlrZj/k7ujTnHg4C+X9VVMk5JpIX4lT40UAYBq08/N+gxEk6YdKlo3+ZSZ3yQdu1q/Jc9dRqBnlBpKxXtGw=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(120deg, #f0f8ff, #e6e6fa);
+        }
+
+        header {
+            background-color: #4caf50;
+            color: white;
+            padding: 20px 0;
+            text-align: center;
+        }
+
+        header h1 {
+            margin: 0;
+            font-size: 3em;
+            letter-spacing: 2px;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 40px auto;
+            padding: 20px;
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+
+        .container h2 {
+            font-size: 2.5em;
+            color: #333;
+            margin-bottom: 20px;
+        }
+
+        .result-box {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 30px;
+        }
+
+        .result-box div {
+            width: 45%;
+        }
+
+        .result-box img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .result-details {
+            text-align: left;
+            margin-top: 40px;
+        }
+
+        .result-details p {
+            font-size: 1.3em;
+            margin: 10px 0;
+            color: #333;
+        }
+
+        .confidence {
+            color: #4caf50;
+            font-weight: bold;
+        }
+
+        .metadata-panel {
+            margin-top: 30px;
+            text-align: left;
+        }
+
+        .metadata-panel h4 {
+            font-size: 1.8em;
+            margin-bottom: 15px;
+            color: #4caf50;
+        }
+
+        .metadata-panel p {
+            font-size: 1.2em;
+            margin: 5px 0;
+            color: #555;
+        }
+
+        .metadata-panel p strong {
+            color: #333;
+        }
+
+        .submit-btn {
+            margin-top: 40px;
+            padding: 12px 24px;
+            font-size: 1.2em;
+            background-color: #ff1493;
+            color: white;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .submit-btn:hover {
+            background-color: #ff69b4;
+        }
+
+        .footer {
+            background-color: #4caf50;
+            color: white;
+            padding: 20px 0;
+            text-align: center;
+            margin-top: 40px;
+        }
+
+        .footer p {
+            margin: 0;
+            font-size: 1.1em;
+        }
+
+        .footer i {
+            color: #ff69b4;
+            padding: 0 5px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <header>
+        <h1>Fake Buster</h1>
+    </header>
+
+    <div class="container">
+        <h2>Forgery Detection Results</h2>
+
+        <div class="result-box">
+            <div>
+                <h3>Original Image</h3>
+                <img src="{{ original_image_url }}" alt="Original Image">
+            </div>
+            <div>
+                <h3>ELA Image</h3>
+                <img src="{{ ela_image_url }}" alt="ELA Image">
+            </div>
+        </div>
+
+        <div class="result-details">
+            <p><strong>Prediction:</strong> {{ prediction }}</p>
+            <p><strong>Confidence:</strong> <span class="confidence">{{ confidence }}%</span></p>
+        </div>
+
+        <div class="metadata-panel">
+            <h4>Metadata Information</h4>
+            {% if metadata %}
+                {% for key, value in metadata.items() %}
+                    <p><strong>{{ key }}:</strong> {{ value }}</p>
+                {% endfor %}
+            {% else %}
+                <p>No metadata available for this image.</p>
+            {% endif %}
+        </div>
+
+        <a href="/"><button class="submit-btn">Upload Another Image</button></a>
+    </div>
+
+    <div class="footer">
+        <p>&copy; 2024 Fake Buster. All rights reserved. <i class="fas fa-shield-alt"></i></p>
+    </div>
+
+</body>
+
+</html>
